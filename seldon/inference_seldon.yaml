@@ -7,7 +7,7 @@ spec:
   - graph:
       name: seldon
       implementation: TENSORFLOW_SERVER
-      modelUri: pvc://pvctf8/
+      modelUri: pvc://pvctfseldon/
       serviceAccountName: default-editor
     name: default
     replicas: 1

@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: pvctf9
+  name: pvctfkserve
 spec:
   accessModes:
   - ReadWriteMany

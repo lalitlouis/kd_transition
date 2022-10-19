@@ -15,7 +15,7 @@ spec:
           volumes:
             - name: data-volume
               persistentVolumeClaim:
-                claimName: pvctf8
+                claimName: pvctfseldon
           containers:
             - name: tensorflow
               image: lalitlouis/tfjob:v1
