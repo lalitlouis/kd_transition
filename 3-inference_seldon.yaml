@@ -1,0 +1,42 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: seldon13
+spec:
+  predictors:
+  - graph:
+      name: seldon
+      implementation: TENSORFLOW_SERVER
+      modelUri: pvc://pvctf8/
+      serviceAccountName: default-editor
+    name: default
+    replicas: 1
+    svcOrchSpec:
+      resources:
+        limits:
+          cpu: "1"
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+    componentSpecs:
+    - metadata: {}
+      spec:
+        containers:
+        - name: tfserving
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+        - name: seldon
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+    engineResources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi

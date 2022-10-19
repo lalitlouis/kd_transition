@@ -1,0 +1,17 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: tfjob-serving
+  annotations:
+    sidecar.istio.io/inject: "false"
+spec:
+  predictor:
+    tensorflow:
+      storageUri: "pvc://pvctf9"
+      resources:
+        limits:
+          cpu: "500m"
+          memory: "512Mi"
+        requests:
+          cpu: "250m"
+          memory: "256Mi"

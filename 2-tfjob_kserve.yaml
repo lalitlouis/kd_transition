@@ -1,0 +1,34 @@
+apiVersion: "kubeflow.org/v1"
+kind: TFJob
+metadata:
+  name: tfjob-sample
+spec:
+  tfReplicaSpecs:
+    Worker:
+      replicas: 1
+      restartPolicy: Never
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          volumes:
+            - name: data-volume
+              persistentVolumeClaim:
+                claimName: pvctf9
+          containers:
+            - name: tensorflow
+              image: lalitlouis/tfjob:v1
+              volumeMounts:
+              - mountPath: /data
+                name: data-volume
+              resources:
+                 limits:
+                   cpu: "200m"
+                   memory: "512Mi"
+                 requests:
+                   cpu: "100m"
+                   memory: "256Mi"
+              command:
+                - python
+                - /opt/train_kserve.py
